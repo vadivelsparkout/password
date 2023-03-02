@@ -1,0 +1,91 @@
+1.tests["name"]=responseCode.code==200;
+2.tests["string"]=responseBody.has("M.Ranjithkumar Kumar");
+3.var response=JSON.parse(responseBody)
+tests["check"]=response.status==true;
+//check key value pair in json
+4.3.var response=JSON.parse(responseBody)
+tests["check"]=response.status=="true";
+
+5.//header validation
+pm.test("header content-type",function()
+{
+    pm.response.to.be.header("Content-Type","text/html; charset=UTF-8");
+    //key ,value pair
+});
+
+
+6. postman variable
+
+*collection variable-(variable on collection,pre-request script on variable)
+*envoirnmental variable(can use multiple collection)
+
+7.work flow
+click test  on first  request 
+
+postman.setNextRequest("Home Listing Event");
+
+last request enter value Null
+
+
+8.API request chain
+
+step 1: first create a global variable give some random initial and final value 
+icreated first_name as a global variable
+step 2:1 request under test coloum
+JsonData=JSON.parse(responseBody)
+value=JsonData.data[0].first_name
+pm.globals.set("first_name","Michael");
+
+step3:2 request under body raw data
+
+{
+    "name": "{{first_name}}",
+    "job": "zion resident"
+}
+
+9.Checking multiple response code
+
+pm.test("check multiple status code",function()
+{
+    pm.expect(pm.response.code).to.be.oneOf([200,201])
+});
+
+10.multiple assertion
+pm.test("multiple assertion",function()
+{
+responseJson=pm.response.json();
+    pm.expect(responseJson.name).to.eql("Michael")
+     pm.expect(responseJson.job).to.eql("zion resident")
+
+});
+11.Header assertion
+
+a.key assertion
+pm.test("header assertion",function()
+{
+    pm.response.to.have.header("Content-Encoding")
+});
+b.key-value assertion
+pm.test("header value assertion",function()
+{
+    pm.expect(pm.response.headers.get("Content-Encoding")).to.eql("br")
+});
+c.key-value assertion
+pm.test("header value assertion",function()
+{
+    pm.response.to.be.header("Content-Encoding","br")
+});
+
+12.Cookie assertion
+a.name of the cookie
+pm.test("cookie name",function()
+{
+    pm.expect(pm.cookies.has("name of the cookie").to.be.true;
+});
+b.cookie name and value
+a.name of the cookie
+pm.test("cookie name",function()
+{
+    pm.expect(pm.cookie.get("name of the cookie").to.eql("value of the cookie");
+});
+
